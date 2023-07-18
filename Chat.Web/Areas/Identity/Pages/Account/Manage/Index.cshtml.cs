@@ -23,20 +23,17 @@ namespace Chat.Web.Areas.Identity.Pages.Account.Manage
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ILogger<IndexModel> _logger;
         private readonly IWebHostEnvironment _env;
-        private readonly IFileValidator _fileValidator;
 
         public IndexModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             ILogger<IndexModel> logger,
-            IWebHostEnvironment env,
-            IFileValidator fileValidator)
+            IWebHostEnvironment env)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _env = env;
-            _fileValidator = fileValidator;
         }
 
         /// <summary>
@@ -146,12 +143,12 @@ namespace Chat.Web.Areas.Identity.Pages.Account.Manage
             if (user == null)
                 return NotFound();
 
-            if (!_fileValidator.IsValid(AvatarFile))
-            {
+           // if (!_fileValidator.IsValid(AvatarFile))
+            //{
                 UploadAvatarErrorMessage = "Invalid file.";
                 await LoadAsync(user);
                 return Page();
-            }
+            //}
 
             // Upload new picture
             var fileName = Guid.NewGuid().ToString("N") + Path.GetExtension(AvatarFile.FileName);

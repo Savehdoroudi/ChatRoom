@@ -44,7 +44,6 @@ namespace Chat.Web
             }).AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddAutoMapper(typeof(Startup));
-            services.AddTransient<IFileValidator, FileValidator>();
             services.AddRazorPages();
             services.AddControllers();
             services.AddSignalR();
